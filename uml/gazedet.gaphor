@@ -5991,6 +5991,9 @@ c4dependency name {
 <interaction>
 <ref refid="43191dcf-e282-11f0-b55b-40b076de18d0"/>
 </interaction>
+<messageSort>
+<val>asynchCall</val>
+</messageSort>
 <name>
 <val>sendMessage(endStage)</val>
 </name>
