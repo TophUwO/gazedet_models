@@ -3,12 +3,392 @@
 <model>
 <Core:StyleSheet id="58d6989a-66f8-11ec-b4c8-0456e5e540ed">
 <styleSheet>
-<val>diagram {
- /* line-style: sloppy 0.3; */
+<val>/* Gaphor diagram style sheet */
+
+* {
+  --opaque-background-color: white;
+  background-color: transparent;
 }
 
-controlflow {
+:not(diagramframe):drop {
+  color: #1a5fb4;
+  line-width: 3;
+}
+
+:disabled {
+  opacity: 0.5;
+}
+
+@media light-mode {
+  * {
+    --opaque-background-color: #fafafa;
+  }
+}
+
+@media dark-mode {
+  * {
+    --opaque-background-color: #242424;
+    color: white;
+  }
+
+  :drop {
+    color: #62a0ea;
+  }
+}
+
+:root {
+  color: black;
+  font-family: sans;
+  font-size: 14 ;
+  line-width: 2;
+  padding: 0;
+}
+
+diagramframe {
+  justify-content: start;
+}
+
+:is(:root, diagramframe) &gt; pentagon {
+  line-width: 1;
+  background-color: var(--opaque-background-color);
+}
+
+:is(:root, diagramframe) &gt; pentagon &gt; diagramtype {
+  font-weight: bold;
+  padding: 4 0 4 4;
+}
+
+:is(:root, diagramframe) &gt; pentagon &gt; stereotypes {
+  padding: 4 0 4 4;
+}
+
+:is(:root, diagramframe) &gt; pentagon &gt; name {
+  padding: 4;
+}
+
+/* Relationships */
+
+commentline,
+c4dependency,
+dependency,
+interfacerealization,
+include,
+extend,
+packageimport,
+lifetime,
+satisfy,
+derivereqt,
+trace,
+verify,
+refine {
+ dash-style: 7 5;
+}
+
+dependency[on_folded_interface = true],
+interfacerealization[on_folded_interface = true] {
   dash-style: 0;
+}
+
+/* General */
+
+comment {
+  text-align: left;
+  vertical-align: top;
+  padding: 4 16 4 4;
+}
+
+comment stereotypes {
+  text-align: center;
+}
+
+comment body {
+  padding: 0;
+}
+
+diagram &gt; icon {
+  padding: 4;
+  border-radius: 4;
+}
+
+diagram &gt; type {
+  font-weight: bold;
+}
+
+metadata {
+  justify-content: stretch;
+  text-align: left;
+}
+
+metadata cell {
+  padding: 4;
+}
+
+metadata heading {
+  font-weight: bold;
+  font-style: normal;
+  font-size: small;
+}
+
+pentagon {
+  padding: 4;
+  justify-content: start;
+  text-align: left;
+}
+
+/* UML */
+
+controlflow {
+  dash-style: 9 3;
+}
+
+objectnode &gt; icon {
+  padding: 4 12;
+}
+
+decisionnode &gt; type {
+  font-size: small;
+}
+
+proxyport &gt; icon,
+activityparameternode,
+executionspecification {
+  background-color: var(--opaque-background-color);
+}
+
+partition {
+  padding: 4 12 4 12;
+  justify-content: stretch;
+}
+
+package {
+  padding: 24 12 4 12;
+}
+
+interaction {
+  justify-content: start;
+}
+
+activity {
+  padding: 4 12;
+  border-radius: 20;
+  justify-content: start;
+}
+
+activityparameternode {
+  padding: 4 12;
+  min-width: 120;
+  text-align: center;
+}
+
+action,
+valuespecificationaction {
+  padding: 4 12;
+  border-radius: 15;
+}
+
+callbehavioraction {
+  padding: 4 24 4 12;
+  border-radius: 15;
+}
+
+sendsignalaction {
+  padding: 4 24 4 12;
+}
+
+accepteventaction {
+  padding: 4 12 4 24;
+}
+
+usecase {
+  padding: 4;
+}
+
+swimlane {
+  min-width: 150;
+  padding: 4 12 4 12;
+  justify-content: start;
+  white-space: normal;
+}
+
+association &gt; end {
+  font-size: x-small;
+  padding: 4;
+}
+
+/* SysML */
+
+requirement {
+  justify-content: start;
+}
+
+requirement text {
+  white-space: normal;
+}
+
+directedrelationshippropertypath {
+  dash-style: 7 5;
+}
+
+/* Classifiers */
+
+compartment:first-child {
+  padding: 12 4;
+}
+
+compartment + compartment {
+  padding: 4;
+  min-height: 8;
+  text-align: left;
+  justify-content: start;
+  white-space: nowrap;
+}
+
+artifact compartment:first-child,
+component compartment:first-child {
+  padding: 12 24 12 4;
+}
+
+state compartment:first-child {
+  padding: 4;
+}
+
+:has(.item),
+:has(compartment + compartment),
+:has(regions) {
+  justify-content: start;
+}
+
+regions {
+  justify-content: stretch;
+}
+
+region {
+  padding: 4;
+  min-height: 100;
+  justify-content: start;
+  text-align: left;
+}
+
+region + region {
+  dash-style: 7 3;
+}
+
+and name,
+xor name,
+intermediateevent name,
+dormantevent name,
+basicevent name,
+houseevent name,
+topevent name,
+inhibit name,
+conditionalevent name,
+zeroevent name,
+or name,
+not name,
+transferin name,
+transferout name,
+undevelopedevent name,
+seq name,
+majorityvote name,
+unsafecontrolaction name,
+operationalsituation name,
+controlaction name,
+interfaceblock name,
+block name,
+property name,
+requirement name,
+c4person name,
+c4database name,
+c4container name,
+package name,
+enumeration name,
+interface name,
+class name,
+datatype name,
+component name,
+statemachine name,
+usecase name,
+actor name,
+artifact name,
+node name {
+  font-weight: bold;
+}
+
+name[isabstract] {
+  font-style: italic;
+}
+
+from {
+  font-size: x-small;
+}
+
+activity &gt; :is(name, stereotypes) {
+  text-align: left;
+}
+
+compartment heading {
+  padding: 0 0 4 0;
+  font-size: x-small;
+  font-style: italic;
+  text-align: center;
+}
+
+operation[isabstract] {
+  font-style: italic;
+}
+
+attribute[isstatic],
+operation[isstatic] {
+  text-decoration: underline;
+}
+
+property:not([aggregation="composite"]) {
+  dash-style: 7 5;
+}
+
+/* Attached */
+
+:has(icon)[connected_side] {
+  text-align: right;
+  vertical-align: top;
+}
+
+:has(icon)[connected_side="left"] {
+  text-align: left;
+}
+
+:has(icon)[connected_side="bottom"] {
+  vertical-align: bottom;
+}
+
+/* C4 model */
+
+c4container, c4person {
+  padding: 4 4 4 4;
+}
+
+c4database {
+  padding: 20 4 4 4;
+}
+
+:is(c4container, c4database, c4person):has(.item) {
+  justify-content: end;
+}
+
+:is(c4container, c4database, c4person):has(.item) &gt; :is(name, technology) {
+  text-align: left;
+}
+
+c4dependency name {
+  max-width: 150;
+}
+
+:is(c4container, c4database, c4dependency, c4person) technology {
+  font-size: x-small;
+}
+
+:is(c4container, c4database, c4person) description {
+  padding: 4 4 0 4;
 }
 </val>
 </styleSheet>
@@ -589,13 +969,13 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 78.00757266354339, 351.9693507392915)</val>
 </matrix>
 <top-left>
-<val>(5.5834726783277375, 4.7908918027945475)</val>
+<val>(9.10298649435461, 7.149652444283198)</val>
 </top-left>
 <width>
-<val>1064.6607468813738</val>
+<val>1061.141233065347</val>
 </width>
 <height>
-<val>921.9189330353831</val>
+<val>919.5601723938945</val>
 </height>
 <children>
 <reflist>
@@ -652,7 +1032,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 217.094826000591, 116.76127772589564)</val>
 </matrix>
 <points>
-<val>[(293.3718454132545, 3.6072789968250163), (385.7864902247545, 2.752191441960406), (393.0495203200803, 2.752191441960292)]</val>
+<val>[(293.3718454132546, 68.24831273197591), (393.0495203200803, 68.24831273197591)]</val>
 </points>
 <head-connection>
 <ref refid="42a9ff1a-e025-11f0-af8d-9516e15bea5d"/>
@@ -998,6 +1378,8 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="075a77ee-e201-11f0-8283-40b076de18d0"/>
 <ref refid="0ab5ab11-e201-11f0-be75-40b076de18d0"/>
 <ref refid="0e0329e5-e201-11f0-b015-40b076de18d0"/>
+<ref refid="43a7dc12-e206-11f0-9efe-40b076de18d0"/>
+<ref refid="ed75a868-e1fe-11f0-aea4-40b076de18d0"/>
 </reflist>
 </ownedAttribute>
 <ownedOperation>
@@ -1282,7 +1664,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Class>
 <UML:ClassItem id="7b020668-e1f1-11f0-b452-40b076de18d0">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 531.6999018762268, 312.5062672145674)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 531.6999018762268, 336.20878708073906)</val>
 </matrix>
 <top-left>
 <val>(0.0, -1.0413802301896453)</val>
@@ -1529,7 +1911,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Association>
 <UML:Property id="aee5e9b3-e1f0-11f0-af2f-40b076de18d0">
 <aggregation>
-<val>shared</val>
+<val>composite</val>
 </aggregation>
 <association>
 <ref refid="aee59b5d-e1f0-11f0-a914-40b076de18d0"/>
@@ -1756,6 +2138,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="6a9cb668-e1fc-11f0-92a6-40b076de18d0"/>
 <ref refid="6e7568d2-e1fc-11f0-b2fc-40b076de18d0"/>
 <ref refid="7f87b8ad-e201-11f0-9c40-40b076de18d0"/>
+<ref refid="e0984a74-e0c9-11f0-adb6-bf150c0b0ad3"/>
 </reflist>
 </ownedAttribute>
 <ownedOperation>
@@ -1812,7 +2195,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <ownedEnd>
 <reflist>
 <ref refid="e098431d-e0c9-11f0-9d53-bf150c0b0ad3"/>
-<ref refid="e0984a74-e0c9-11f0-adb6-bf150c0b0ad3"/>
 </reflist>
 </ownedEnd>
 <owningPackage>
@@ -1834,9 +2216,9 @@ existing classes or even new classes with specific responsibilities.</val>
 <association>
 <ref refid="e097f70c-e0c9-11f0-b467-bf150c0b0ad3"/>
 </association>
-<owningAssociation>
-<ref refid="e097f70c-e0c9-11f0-b467-bf150c0b0ad3"/>
-</owningAssociation>
+<structuredClassifier>
+<ref refid="b0b65ad3-e05b-11f0-9cec-9516e15bea5d"/>
+</structuredClassifier>
 <type>
 <ref refid="e71e316a-e05b-11f0-befd-9516e15bea5d"/>
 </type>
@@ -2241,7 +2623,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <ownedEnd>
 <reflist>
 <ref refid="ed75a11d-e1fe-11f0-ac71-40b076de18d0"/>
-<ref refid="ed75a868-e1fe-11f0-aea4-40b076de18d0"/>
 </reflist>
 </ownedEnd>
 <owningPackage>
@@ -2281,14 +2662,14 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Property>
 <UML:Property id="ed75a868-e1fe-11f0-aea4-40b076de18d0">
 <aggregation>
-<val>shared</val>
+<val>composite</val>
 </aggregation>
 <association>
 <ref refid="ed755721-e1fe-11f0-b1f5-40b076de18d0"/>
 </association>
-<owningAssociation>
-<ref refid="ed755721-e1fe-11f0-b1f5-40b076de18d0"/>
-</owningAssociation>
+<structuredClassifier>
+<ref refid="42a97a7a-e025-11f0-b97a-9516e15bea5d"/>
+</structuredClassifier>
 <type>
 <ref refid="b0b65ad3-e05b-11f0-9cec-9516e15bea5d"/>
 </type>
@@ -2612,7 +2993,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <ownedEnd>
 <reflist>
 <ref refid="43a7d6b4-e206-11f0-89e9-40b076de18d0"/>
-<ref refid="43a7dc12-e206-11f0-9efe-40b076de18d0"/>
 </reflist>
 </ownedEnd>
 <owningPackage>
@@ -2652,14 +3032,14 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Property>
 <UML:Property id="43a7dc12-e206-11f0-9efe-40b076de18d0">
 <aggregation>
-<val>shared</val>
+<val>composite</val>
 </aggregation>
 <association>
 <ref refid="43a794ae-e206-11f0-b287-40b076de18d0"/>
 </association>
-<owningAssociation>
-<ref refid="43a794ae-e206-11f0-b287-40b076de18d0"/>
-</owningAssociation>
+<structuredClassifier>
+<ref refid="42a97a7a-e025-11f0-b97a-9516e15bea5d"/>
+</structuredClassifier>
 <type>
 <ref refid="93c6e6fa-e026-11f0-abbe-9516e15bea5d"/>
 </type>
@@ -2769,7 +3149,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 794.2222222222222, 687.136757589841)</val>
 </matrix>
 <points>
-<val>[(-1.5147476824520254, 0.0), (32.222222222222285, 0.0)]</val>
+<val>[(-1.514747682452139, 24.86814948625181), (32.2222222222224, 24.86814948625181)]</val>
 </points>
 </general:Line>
 <general:Line id="d92133a5-e206-11f0-b91c-40b076de18d0">
